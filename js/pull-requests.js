@@ -2,10 +2,14 @@ fetch("https://api.github.com/repos/codeyourfuture/js-exercises/pulls")
   .then(function(data) {
     return data.json();
   })
-  .then(function(repos) {
+  .then(function(pullReq) {
     var reqList = document.querySelector("#pull-requests-list");
 
-    repos.forEach(function(req) {
+    var filteredItems = pullReq.filter(function(ownReq) {
+      return ownReq.user.login == "Perasperad";
+    });
+
+    filteredItems.forEach(function(req) {
       var listOfReq = document.createElement("li");
       var linksOfReq = document.createElement("a");
       linksOfReq.setAttribute("href", req.html_url);
